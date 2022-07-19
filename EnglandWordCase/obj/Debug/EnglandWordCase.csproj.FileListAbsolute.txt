@@ -1,0 +1,11 @@
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\bin\Debug\EnglandWordCase.exe.config
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\bin\Debug\EnglandWordCase.exe
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\bin\Debug\EnglandWordCase.pdb
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.csproj.AssemblyReference.cache
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.csproj.SuggestedBindingRedirects.cache
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.MainForm.resources
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.Properties.Resources.resources
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.csproj.GenerateResource.cache
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.csproj.CoreCompileInputs.cache
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.exe
+D:\Users\MGaming\Desktop\git\england\EnglandWordCase\EnglandWordCase\obj\Debug\EnglandWordCase.pdb
