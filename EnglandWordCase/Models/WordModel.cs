@@ -1,5 +1,8 @@
-﻿namespace EnglandWordCase.Models
+﻿using System;
+
+namespace EnglandWordCase.Models
 {
+    [Serializable]
     internal class WordModel
     {
         private string name;
