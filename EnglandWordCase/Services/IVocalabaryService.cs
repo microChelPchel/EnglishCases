@@ -1,5 +1,4 @@
-﻿
-using EnglandWordCase.Models;
+﻿using EnglandWordCase.Models;
 using System.Collections.Generic;
 
 namespace EnglandWordCase.Services
@@ -7,6 +6,8 @@ namespace EnglandWordCase.Services
     internal interface IVocalabaryService
     {
         bool SaveVocalobary(List<WordModel> words);
+
+        List<WordModel> LoadVocalobary();
 
     }
 }

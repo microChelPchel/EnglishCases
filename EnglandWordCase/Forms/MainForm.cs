@@ -1,4 +1,5 @@
-﻿using EnglandWordCase.Models;
+﻿using EnglandWordCase.Controllers;
+using EnglandWordCase.Models;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,11 +9,17 @@ namespace EnglandWordCase
     public partial class MainForm : Form
     {
         private Point pointForm;
+        private VocalobaryController vocalobaryController;
+        private TestController testController;
+        private List<WordModel> testData;
 
         public MainForm()
         {
             InitializeComponent();
+            vocalobaryController = new VocalobaryController();
+            testController = new TestController();
         }
+
         private void moveForm(MouseEventArgs evnt)
         {
             if (evnt.Button == MouseButtons.Left)
@@ -27,23 +34,59 @@ namespace EnglandWordCase
             pointForm = new Point(evnt.X, evnt.Y);
         }
 
-        private void managmentVisiblePanel(Panel currentPanel)
+        private void ManagmentVisiblePanel(Panel currentPanel)
         {
-            List<Panel> panels = new List<Panel>();
-            panels.Add(panelVocabulary);
-            setVisiblePanel(panels, currentPanel);
+            switch (currentPanel.Name)
+            {
+                case "panelVocabulary":
+                    panelTrain.Visible = false;
+                    panelVocabulary.Visible = true;
+                    break;
+                case "panelTrain":
+                    panelTrain.Visible = true;
+                    panelVocabulary.Visible = false;
+                    break;
+                default:
+                    panelTrain.Visible = false;
+                    panelVocabulary.Visible = false;
+                    break;
+            }
+
 
         }
 
-        private void setVisiblePanel(List<Panel> panels, Panel currentPanel)
+        private void LoadDataGridView()
         {
-            foreach (var panel in panels)
+            dataGridView1.Rows.Clear();
+            foreach (var item in vocalobaryController.Load())
             {
-                currentPanel.Visible = panel.Name.Equals(currentPanel.Name) ? true : false;
+                dataGridView1.Rows.Add(item.Name, item.Value);
             }
+        }
+
+        private void PrintText()
+        {
+            labelCount.Text = "Count word:" + (dataGridView1.Rows.Count - 1);
+        }
+
+        private void TotalResultTest()
+        {
+            InstallPanelVisible(true, false);
+            MessageBox.Show($"Total:");
+        }
+
+        private void InstallPanelVisible(bool buttonVisible, bool testVisible)
+        {
+            panelButton.Visible = buttonVisible;
+            panelTest.Visible = testVisible;
+        }
+
+        private void Result()
+        { 
         
         }
 
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -86,20 +129,62 @@ namespace EnglandWordCase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            managmentVisiblePanel(panelVocabulary);
+            ManagmentVisiblePanel(panelVocabulary);
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            LoadDataGridView();
+            PrintText();
+        }
+
+        //TODO:create primery key for file
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<WordModel> words = new List<WordModel>();
+            for (var i = 0; i < dataGridView1.Rows.Count-1; i++)
+            {
+                words.Add(new WordModel(dataGridView1[0, i].Value.ToString(), dataGridView1[1, i].Value.ToString()));
+            }
+            vocalobaryController.Save(words);
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            PrintText();
+        }
+
+        private void dataGridView1_SizeChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void labelCount_ClientSizeChanged(object sender, EventArgs e)
+        {
+        }
         private void panelVocabulary_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void TrainTrey_Click(object sender, EventArgs e)
         {
-
+            ManagmentVisiblePanel(panelTrain);
+            panelButton.Visible = true;
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
+        {
+            InstallPanelVisible(false, true);
+            testData = testController.GetWords(4); //int need from settings
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            TotalResultTest();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
         {
 
         }

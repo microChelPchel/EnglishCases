@@ -1,15 +1,13 @@
 ﻿using EnglandWordCase.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnglandWordCase.Services
 {
-    internal class VocalabaryService : BasesController, IVocalabaryService
+    internal class VocalabaryService : BasesService, IVocalabaryService
     {
-      
+        public List<WordModel> LoadVocalobary() => Desirilize<List<WordModel>>("words.dat");
+
         public bool SaveVocalobary(List<WordModel> words)
         {
             try
@@ -24,5 +22,6 @@ namespace EnglandWordCase.Services
 
 
         }
+
     }
 }

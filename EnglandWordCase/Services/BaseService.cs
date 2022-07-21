@@ -3,7 +3,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace EnglandWordCase.Services
 {
-    abstract class BasesController
+    abstract class BasesService
     {
         protected void Serilaze(string fileName, object items)
         {
