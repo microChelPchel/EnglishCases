@@ -66,6 +66,7 @@
     <Compile Include="Services\IVocalabaryService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\VocalabaryService.cs" />
+    <Compile Include="StructureData\Queue.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -11,13 +11,16 @@ namespace EnglandWordCase
         private Point pointForm;
         private VocalobaryController vocalobaryController;
         private TestController testController;
-        private List<WordModel> testData;
+        private StructureData.Queue<WordModel> _queue;
+        private WordModel _currentWord;
+        private int score;
 
         public MainForm()
         {
             InitializeComponent();
             vocalobaryController = new VocalobaryController();
             testController = new TestController();
+            _queue = new StructureData.Queue<WordModel>();
         }
 
         private void moveForm(MouseEventArgs evnt)
@@ -71,8 +74,9 @@ namespace EnglandWordCase
 
         private void TotalResultTest()
         {
-            InstallPanelVisible(true, false);
-            MessageBox.Show($"Total:");
+            InstallPanelVisible(true, false); 
+            ClearData();
+            MessageBox.Show($"Total: "+score);
         }
 
         private void InstallPanelVisible(bool buttonVisible, bool testVisible)
@@ -81,12 +85,11 @@ namespace EnglandWordCase
             panelTest.Visible = testVisible;
         }
 
-        private void Result()
-        { 
-        
+        private void TextWord()
+        {
+            label3.Text = _currentWord.Name;
+            textBox1.Clear();
         }
-
-        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -130,6 +133,10 @@ namespace EnglandWordCase
         private void button2_Click(object sender, EventArgs e)
         {
             ManagmentVisiblePanel(panelVocabulary);
+            panelTest.Visible = false;
+            score = 0;
+            label3.Text = "";
+            textBox1.Clear();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -154,6 +161,12 @@ namespace EnglandWordCase
             PrintText();
         }
 
+        private void ClearData()
+        {
+            label3.Text = "";
+            textBox1.Clear();
+        }
+
         private void dataGridView1_SizeChanged(object sender, EventArgs e)
         {
            
@@ -176,8 +189,18 @@ namespace EnglandWordCase
         private void button3_Click(object sender, EventArgs e)
         {
             InstallPanelVisible(false, true);
-            testData = testController.GetWords(4); //int need from settings
+            int countWord = 4;
+            score = 0;
+            var array = testController.GetWords(countWord); //int need from settings
+            _queue = new StructureData.Queue<WordModel>(countWord);
+            foreach (var item in array)
+            { 
+                _queue.Enqueue(item);
+            }
+            _currentWord = _queue.Dequeue();
+            TextWord();
         }
+
 
         private void button8_Click(object sender, EventArgs e)
         {
@@ -186,7 +209,29 @@ namespace EnglandWordCase
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            NextWord();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Trim().ToLower().Equals(_currentWord.Value))
+            {
+                score++;
+            }
+            NextWord();
+        }
+
+        private void NextWord()
+        {
+            if (_queue.IsEmpty())
+            {
+                TotalResultTest();
+                return;
+            }
+            _currentWord = _queue.Dequeue();
+            TextWord();
+        }
+
+
     }
 }
