@@ -49,7 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\SettingController.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SettingModel.cs" />
     <Compile Include="Services\BaseService.cs" />
     <Compile Include="Controllers\VocalobaryController.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -62,13 +70,18 @@
     <Compile Include="Models\WordModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ISettingService.cs" />
     <Compile Include="Services\ITestService.cs" />
     <Compile Include="Services\IVocalabaryService.cs" />
+    <Compile Include="Services\SettingService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\VocalabaryService.cs" />
     <Compile Include="StructureData\Queue.cs" />
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
