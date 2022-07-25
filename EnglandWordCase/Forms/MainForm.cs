@@ -1,4 +1,5 @@
 ﻿using EnglandWordCase.Controllers;
+using EnglandWordCase.Forms;
 using EnglandWordCase.Models;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace EnglandWordCase
         private StructureData.Queue<WordModel> _queue;
         private WordModel _currentWord;
         private int score;
+        private SettingController _settingController;
 
         public MainForm()
         {
@@ -21,7 +23,9 @@ namespace EnglandWordCase
             vocalobaryController = new VocalobaryController();
             testController = new TestController();
             _queue = new StructureData.Queue<WordModel>();
+            _settingController= new SettingController();
         }
+
 
         private void moveForm(MouseEventArgs evnt)
         {
@@ -188,8 +192,14 @@ namespace EnglandWordCase
 
         private void button3_Click(object sender, EventArgs e)
         {
+             var setting = _settingController.GetDataSetting() ?? new Models.SettingModel(0);
+            var countWord = setting.Count;
+            if (countWord == 0)
+            {
+                MessageBox.Show("Настройки содержат 0 слов");
+                return;
+            }
             InstallPanelVisible(false, true);
-            int countWord = 4;
             score = 0;
             var array = testController.GetWords(countWord); //int need from settings
             _queue = new StructureData.Queue<WordModel>(countWord);
@@ -232,6 +242,11 @@ namespace EnglandWordCase
             TextWord();
         }
 
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var settings = new SettingsForm();
+            settings.StartPosition = FormStartPosition.CenterParent;
+            settings.ShowDialog();
+        }
     }
 }
